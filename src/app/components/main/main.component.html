@@ -4,7 +4,45 @@
             <div class="panel panel-primary">
                 <div class="panel-heading">Configuración</div>
                 <div class="panel-body">
-
+                    <form name="frmConfig">
+                        <div class="form-group">
+                            <label for="endpoint">Endpoint:</label>
+                            <input type="text"
+                                ng-model="config.endpoint"
+                                class="form-control"
+                                required
+                                name="endpoint"
+                                id="endpoint">
+                        </div>
+                        <div class="form-group">
+                            <label for="logo">Logo:</label>
+                            <input type="file"
+                                ng-model="config.logoContent"
+                                class="form-control"
+                                base-sixty-four-input
+                                accept="image/*"
+                                required
+                                name="logo"
+                                id="logo">
+                            <span class="text-success" ng-if="config.logoContent">{{config.logoContent.filename}}</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="certificado">Cerfiicado (.PEM):</label>
+                            <input type="file"
+                                ng-model="config.certContent"
+                                class="form-control"
+                                base-sixty-four-input
+                                accept=".pem"
+                                required
+                                name="certificado"
+                                id="certificado">
+                            <span class="text-success" ng-if="config.certContent">{{config.certContent.filename}}</span>
+                        </div>
+                        <button type="button"
+                        class="btn btn-success"
+                        ng-disabled="frmConfig.$invalid || frmConfig.$pristine"
+                        ng-click="save()">Guardar</button>
+                    </form>
                 </div>
             </div>
         </div>
