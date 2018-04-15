@@ -5,27 +5,28 @@
         .module('app')
         .factory('storeService', storeService);
 
-    storeService.$inject = ['$window', 'ApiConfig'];
+    storeService.$inject = ['$window'];
 
-    function storeService($window, $apiConfig) {
-        var key = 'LYCET_CONFIG';
+    function storeService($window) {
+        var key = 'LYCET_SETTINGS';
         var service = {
-            getEndpoint: getEndpoint,
-            saveEndpoint: saveEndpoint
+            getSettings: getSettings,
+            saveSettings: saveSettings
         };
 
         return service;
 
-        function getEndpoint() {
-            var url = $window.localStorage.getItem(key);
-            $apiConfig.endpoint = url;
+        function getSettings() {
+            var json = $window.localStorage.getItem(key);
+            if (!json) {
+                return null;
+            }
 
-            return url;
+            return JSON.parse(json);
         }
 
-        function saveEndpoint(url) {
-            $apiConfig.endpoint = url;
-            $window.localStorage.setItem(key, url);
+        function saveSettings(config) {
+            $window.localStorage.setItem(key, JSON.stringify(config));
         }
     }
 })();

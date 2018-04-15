@@ -14,8 +14,8 @@
 
         return service;
 
-        function saveConfig(config) {
-            return $http.post($apiConfig.endpoint, config);
+        function saveConfig(token, config) {
+            return $http.post($apiConfig.endpoint + '?token=' + token, config);
         }
     }
 })();

@@ -9,31 +9,41 @@
             controller: mainController,
             controllerAs: 'main'
         });
-        mainController.$inject = ['$scope', 'lycetService', 'storeService'];
+        mainController.$inject = ['$scope', 'lycetService', 'storeService', 'ApiConfig'];
 
-    function mainController($scope, $service, $store) {
+    function mainController($scope, $service, $store, $apiConfig) {
         $scope.config = {};
         $scope.save = saveConfig;
 
         activate();
 
         function activate() {
-            $scope.config.endpoint = $store.getEndpoint();
+            var sett = $store.getSettings();
+            if (!sett) {
+                return;
+            }
+
+            $scope.config.endpoint = sett.endpoint;
+            $scope.config.token = sett.token;
         }
         
         function saveConfig() {
             var config = $scope.config;
-            saveEndpoint(config.endpoint);
             var data = {
                 logo: config.logoContent.base64,
                 certificate: config.certContent.base64
             };
-
-            console.log(data);
+            saveSett(config);
+            $service.save(config.token, data);
         }
 
-        function saveEndpoint(url) {
-            $store.saveEndpoint(url);
+        function saveSett(config) {
+            var sett = {
+                endpoint: config.endpoint,
+                token: config.token
+            };
+            $apiConfig.endpoint = sett.endpoint;
+            $store.saveSettings(sett);
         }
     }
 })();
