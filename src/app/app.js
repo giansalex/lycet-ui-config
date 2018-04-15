@@ -10,8 +10,11 @@
         'naif.base64',
     ])
     .constant("ApiConfig", { endpoint: 'http://localhost:8080' })
-    .component('factApp', {
+    .component('lycetApp', {
         templateUrl: '/app/app.html',
-        controller: function () {}
+        controllerAs: 'vm',
+        controller: function () {
+            this.title = 'Lycet';
+        }
     });
 })();
