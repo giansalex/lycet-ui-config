@@ -1,9 +1,9 @@
 <div class="container m-top-60">
     <div class="row">
-        <div class="col-md-6 col-md-offset-3">
-            <div class="panel panel-primary">
-                <div class="panel-heading">Configuración</div>
-                <div class="panel-body">
+        <div class="col-md-6 offset-md-3">
+            <div class="card">
+                <div class="card-header bg-dark text-white">Configuración</div>
+                <div class="card-body">
                     <form name="frmConfig">
                         <div class="form-group">
                             <label for="endpoint">Endpoint:</label>
@@ -48,7 +48,7 @@
                             <span class="text-success" ng-if="config.certContent">{{config.certContent.filename}}</span>
                         </div>
                         <button type="button"
-                        class="btn btn-success"
+                        class="btn btn-dark"
                         ng-disabled="frmConfig.$invalid || frmConfig.$pristine"
                         ng-click="save()">Guardar</button>
                     </form>
