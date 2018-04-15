@@ -97,13 +97,6 @@ gulp.task('html', function () {
     .pipe(gulp.dest(bases.dist + '/app'));
 });
 
-// copy robot.txt, humans.txt
-gulp.task('txt', function() {
-    return gulp
-        .src(bases.src + '/*.txt')
-        .pipe(gulp.dest(bases.dist));
-});
-
 // change endpoint to release
 gulp.task('endpoint', function() {
     return gulp
@@ -130,12 +123,6 @@ gulp.task('clean:unused', function() {
     return del([bases.dist + '/tmp', bases.dist + '/app-config.prod.js']);
 });
 
-gulp.task('images', function() {
-    return gulp.src(bases.src + '/images/**/*.+(png|jpg|jpeg|gif|svg)')
-        .pipe(imagemin())
-        .pipe(gulp.dest(bases.dist + '/images'));
-});
-
 gulp.task('fonts',
     function() {
         return gulp.src(bases.src + '/assets/fonts/**/*')
@@ -158,9 +145,8 @@ gulp.task('zip', () =>
 gulp.task('build',
     function(callback) {
         runSequence('clean:dist',
-            'txt',
             ['templates', 'endpoint'],
-            ['useref', 'images', 'fonts'],
+            ['useref', 'fonts'],
             'clean:unused',
             'zip',
             'clean:dist',
