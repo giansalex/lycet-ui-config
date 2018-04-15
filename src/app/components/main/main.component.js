@@ -34,7 +34,13 @@
                 certificate: config.certContent.base64
             };
             saveSett(config);
-            $service.save(config.token, data);
+            $service.save(config.token, data)
+            .then(function () {
+                swal("Guardado!", 'El configuración ha sido guardada', "success");
+            }, function (err) {
+                console.log(err);
+                swal("Error!", "No se pudo guardar", "error");
+            });
         }
 
         function saveSett(config) {
