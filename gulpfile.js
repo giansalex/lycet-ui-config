@@ -88,6 +88,12 @@ gulp.task('useref', function(){
         .pipe(gulp.dest(bases.dist));
 });
 
+gulp.task('favicon', function() {
+    return gulp
+        .src(bases.src + '/favicon.ico')
+        .pipe(gulp.dest(bases.dist));
+});
+
 // copia los html template a dist 
 gulp.task('html', function () {
   return gulp
@@ -145,7 +151,7 @@ gulp.task('build',
     function(callback) {
         runSequence('clean:dist',
             ['templates', 'endpoint'],
-            ['useref', 'fonts'],
+            ['useref', 'fonts', 'favicon'],
             'clean:unused',
             'zip',
             'clean:dist',
