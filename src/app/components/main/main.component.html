@@ -1,4 +1,4 @@
-<uif-message-banner uif-is-visible="showMeesage" uif-action-label="Go" uif-action="openLycet()"> 
+<uif-message-banner uif-is-visible="true" uif-action-label="Go" uif-action="openLycet()"> 
         <uif-content> <b>Lycet UI Config</b> te permite realizar la Configuración del logo y certificado de tu aplicación. </uif-content> 
     </uif-message-banner>
 <div class="container m-top-20">
@@ -49,6 +49,7 @@
                             <span class="text-success" ng-if="config.certContent">{{config.certContent.filename}}</span>
                         </div>
                         <uif-button uif-type="primary"
+                            ng-disabled="sending"
                             ng-click="save()">Guardar</uif-button>
                     </form>
                 </div>

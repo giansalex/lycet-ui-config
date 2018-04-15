@@ -12,7 +12,7 @@
         mainController.$inject = ['$scope', 'lycetService', 'storeService', 'ApiConfig', '$window'];
 
     function mainController($scope, $service, $store, $apiConfig, $window) {
-        $scope.showMeesage = true;
+        $scope.sending = false;
         $scope.config = {};
         $scope.save = saveConfig;
         $scope.openLycet = openLycet;
@@ -41,12 +41,21 @@
                 certificate: config.certContent.base64
             };
             saveSett(config);
-            $service.save(config.token, data)
+            sendConfig(config.token, data);
+        }
+
+        function sendConfig(token, data) {
+            $scope.sending = true;
+
+            $service.save(token, data)
             .then(function () {
                 swal("Guardado!", 'El configuración ha sido guardada', "success");
             }, function (err) {
                 console.log(err);
                 swal("Error!", "No se pudo guardar", "error");
+            })
+            .then(function () {
+                $scope.sending = false;
             });
         }
 
