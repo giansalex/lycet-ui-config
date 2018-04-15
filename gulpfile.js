@@ -128,12 +128,6 @@ gulp.task('clean:unused', function() {
     return del([bases.dist + '/tmp', bases.dist + '/app-config.prod.js']);
 });
 
-gulp.task('fonts',
-    function() {
-        return gulp.src(bases.src + '/assets/fonts/**/*')
-            .pipe(gulp.dest(bases.dist + '/fonts'));
-    });
-
 gulp.task('watch',
     ['browserSync'],
     function() {
@@ -151,7 +145,7 @@ gulp.task('build',
     function(callback) {
         runSequence('clean:dist',
             ['templates', 'endpoint'],
-            ['useref', 'fonts', 'favicon'],
+            ['useref', 'favicon'],
             'clean:unused',
             'zip',
             'clean:dist',

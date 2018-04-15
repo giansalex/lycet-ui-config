@@ -1,3 +1,7 @@
 .m-top-20 {
     margin-top: 20px;
 }
+.center {
+    margin: 0 auto;
+    display: block;    
+}
