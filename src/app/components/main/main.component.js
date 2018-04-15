@@ -9,11 +9,13 @@
             controller: mainController,
             controllerAs: 'main'
         });
-        mainController.$inject = ['$scope', 'lycetService', 'storeService', 'ApiConfig'];
+        mainController.$inject = ['$scope', 'lycetService', 'storeService', 'ApiConfig', '$window'];
 
-    function mainController($scope, $service, $store, $apiConfig) {
+    function mainController($scope, $service, $store, $apiConfig, $window) {
+        $scope.showMeesage = true;
         $scope.config = {};
         $scope.save = saveConfig;
+        $scope.openLycet = openLycet;
 
         activate();
 
@@ -28,6 +30,11 @@
         }
         
         function saveConfig() {
+            var frmConfig = $scope.frmConfig;
+            if (frmConfig.$invalid || frmConfig.$pristine) {
+                return;
+            }
+
             var config = $scope.config;
             var data = {
                 logo: config.logoContent.base64,
@@ -50,6 +57,10 @@
             };
             $apiConfig.endpoint = sett.endpoint;
             $store.saveSettings(sett);
+        }
+
+        function openLycet() {
+            $window.open('https://github.com/giansalex/lycet', '_blank');
         }
     }
 })();

@@ -1,4 +1,7 @@
-<div class="container m-top-60">
+<uif-message-banner uif-is-visible="showMeesage" uif-action-label="Go" uif-action="openLycet()"> 
+        <uif-content> <b>Lycet UI Config</b> te permite realizar la Configuración del logo y certificado de tu aplicación. </uif-content> 
+    </uif-message-banner>
+<div class="container m-top-20">
     <div class="row">
         <div class="col-md-6 offset-md-3">
             <div class="card">
@@ -6,22 +9,20 @@
                 <div class="card-body">
                     <form name="frmConfig">
                         <div class="form-group">
-                            <label for="endpoint">Endpoint:</label>
-                            <input type="url"
+                            <uif-textfield
+                                uif-type="url"
+                                uif-label="Endpoint"
                                 ng-model="config.endpoint"
-                                class="form-control"
                                 required
-                                name="endpoint"
-                                id="endpoint">
+                                uif-description="Lycet configuration endpoint" />
                         </div>
                         <div class="form-group">
-                            <label for="token">Token:</label>
-                            <input type="text"
+                            <uif-textfield
+                                uif-type="text"
+                                uif-label="Token"
                                 ng-model="config.token"
-                                class="form-control"
                                 required
-                                name="token"
-                                id="token">
+                                uif-description="Token por defecto 123456" />
                         </div>
                         <div class="form-group">
                             <label for="logo">Logo:</label>
@@ -47,10 +48,8 @@
                                 id="certificado">
                             <span class="text-success" ng-if="config.certContent">{{config.certContent.filename}}</span>
                         </div>
-                        <button type="button"
-                        class="btn btn-dark"
-                        ng-disabled="frmConfig.$invalid || frmConfig.$pristine"
-                        ng-click="save()">Guardar</button>
+                        <uif-button uif-type="primary"
+                            ng-click="save()">Guardar</uif-button>
                     </form>
                 </div>
             </div>

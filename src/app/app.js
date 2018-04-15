@@ -7,6 +7,8 @@
         // Custom modules 
 
         // 3rd Party Modules
+        'officeuifabric.core',
+        'officeuifabric.components',
         'naif.base64',
     ])
     .constant("ApiConfig", { endpoint: 'http://localhost:8080' })
